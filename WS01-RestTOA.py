@@ -13,8 +13,8 @@
 #                	Driver BD: postgres (lib psycopg2-binary)								      #
 #																      #
 #    Servicios dentro del archivo:                                                                                                    # 
-#       							addCupoEmpresa                   				      # 
-#      								addCupoIndividuos            					      # 
+#       				addCupoEmpresa                   				          		      # 
+#      					addCupoIndividuos            					  			      # 
 #######################################################################################################################################
 
 
