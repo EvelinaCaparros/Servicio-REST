@@ -172,7 +172,9 @@ def addCupoEmpresa():
 			listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and 
 			request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
 				
-			new_cupo = TOA_CUPOS_EMPRESA(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], request.json['work_skill'], request.json['available'])
+			new_cupo = TOA_CUPOS_EMPRESA(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], 
+						     request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], 
+						     request.json['work_skill'], request.json['available'])
 			db.session.add(new_cupo)
 			db.session.commit()
 			return jsonify(response_code='200',
@@ -245,7 +247,9 @@ def addCupoIndividuos():
 			listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and 
 			request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
 				
-			new_cupo = TOA_CUPOS_INDIVIDUOS(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], request.json['work_skill'], request.json['available'])
+			new_cupo = TOA_CUPOS_INDIVIDUOS(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], 
+							request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], 
+							request.json['work_skill'], request.json['available'])
 			db.session.add(new_cupo)
 			db.session.commit()
 			return jsonify(response_code='200',
