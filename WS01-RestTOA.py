@@ -121,9 +121,14 @@ listaTimeSlot = ["AM", "PM"]
 listaBroadbandTechnology = ["ADSL2Plus", "ADSL", "ADSL2", "VDSL", "FTTH", "FTTN"]
 listaTVTechnology = ["IPTV"]
 
-listaUbicacion = ["BK_JUNCAL", "BK_NORTE_ZONA_ATC", "BK_SAN_MARTIN", "BK_ISIDRO_CASANOVA_CTTA", "BK_ISIDRO_CASANOVA_NORTE", "BK_ISIDRO_CASANOVA_SUR", "BK_DESAMPARADO CTTA", "BK_DESAMPARADO_RG", "BK_DESAMPARADO", "BK_RESTO_NORTE", "BK_ACCESO ROSARIO", "BK_ACC_MAR_DEL_PLATA", "BK_MS_MAR_DEL_PLATA", "BK_TUPS_MAR_DEL_PL"]
+listaUbicacion = ["BK_JUNCAL", "BK_NORTE_ZONA_ATC", "BK_SAN_MARTIN", "BK_ISIDRO_CASANOVA_CTTA", "BK_ISIDRO_CASANOVA_NORTE", "BK_ISIDRO_CASANOVA_SUR", 
+		  "BK_DESAMPARADO CTTA", "BK_DESAMPARADO_RG", "BK_DESAMPARADO", "BK_RESTO_NORTE", "BK_ACCESO ROSARIO", "BK_ACC_MAR_DEL_PLATA", "BK_MS_MAR_DEL_PLATA", 
+		  "BK_TUPS_MAR_DEL_PL"]
 
-listaWorkSkill = ["INS_FIBRA_RESID", "INS_ADSL_STB", "Cruzada FTTN", "INS_FIBRA_UNE2", "Instalar_Publica_Tasa", "INS_FIBRA_NEG", "INS_FIBRA_NEG2", "INS_EMPRESAS", "Cruzada FTTN 3ros", "INS_PUBLICA", "Desinstalar Publica TASA", "Desinstalar Publica Terceros", "INS_FIBRA_NEG2", "INS_FIBRA_RESID", "Cruzada FTTN", "INS_EMPRESAS", "INS_FIBRA_UNE2", "INS_FIBRA_UNE2", "INS_FIBRA_NEG2", "INS_ADSL_STB_NEG", "INS_FIBRA_RESID", "REP_PUBLICA", "REP COBRE", "REP_WLL", "REP_PI", "REP_PI_TX", "EMPALMADOR", "REP_FIBRA", "REPARTIDOR", "Rep_Bajadas_y_Supervision", "REP_AVDSL_INST"]
+listaWorkSkill = ["INS_FIBRA_RESID", "INS_ADSL_STB", "Cruzada FTTN", "INS_FIBRA_UNE2", "Instalar_Publica_Tasa", "INS_FIBRA_NEG", "INS_FIBRA_NEG2", "INS_EMPRESAS", 
+		  "Cruzada FTTN 3ros", "INS_PUBLICA", "Desinstalar Publica TASA", "Desinstalar Publica Terceros", "INS_FIBRA_NEG2", "INS_FIBRA_RESID", "Cruzada FTTN", 
+		  "INS_EMPRESAS", "INS_FIBRA_UNE2", "INS_FIBRA_UNE2", "INS_FIBRA_NEG2", "INS_ADSL_STB_NEG", "INS_FIBRA_RESID", "REP_PUBLICA", "REP COBRE", "REP_WLL", 
+		  "REP_PI", "REP_PI_TX", "EMPALMADOR", "REP_FIBRA", "REPARTIDOR", "Rep_Bajadas_y_Supervision", "REP_AVDSL_INST"]
 
 
 #Valores inválidos para los distintos campos
@@ -136,22 +141,37 @@ listaREST05 = ["#", "$", "%", "&", "/", "¿", "?", "(", ")", "=", "¡", "!", "{"
 @app.route('/save_empresa', methods=['POST'])
 def addCupoEmpresa():
 	try:
-		if len(request.json['access_technology']) > 10 or len(request.json['telephone_technology']) > 10 or len(request.json['broadband_technology']) > 10 or len(request.json['tv_technology'])> 10 or len(request.json['ubicacion']) > 20 or len(request.json['time_slot']) > 5 or len(request.json['work_skill']) > 30:
+		if len(request.json['access_technology']) > 10 or len(request.json['telephone_technology']) > 10 or len(request.json['broadband_technology']) > 10 or 
+			len(request.json['tv_technology'])> 10 or len(request.json['ubicacion']) > 20 or len(request.json['time_slot']) > 5 or len(request.json['work_skill']) > 30:
+				
 			raise MaxLongError
 			
-		elif not request.json['access_technology'] or not request.json['telephone_technology'] or not request.json['ubicacion'] or not request.json['fecha'] or not request.json['time_slot'] or not request.json['work_skill'] or not request.json['available'] :
+		elif not request.json['access_technology'] or not request.json['telephone_technology'] or not request.json['ubicacion'] or not request.json['fecha'] or not 
+			request.json['time_slot'] or not request.json['work_skill'] or not request.json['available'] :
+				
 			raise CampoNuloError 
 			
-		elif request.json['access_technology'] in listaREST04 or request.json['telephone_technology'] in listaREST04 or request.json['broadband_technology'] in listaREST04 or request.json['tv_technology'] in listaREST04 or request.json['ubicacion'] in listaREST04 or request.json['time_slot'] in listaREST04 or request.json['work_skill'] in listaREST04 or request.json['fecha'] in listaREST04f:
+		elif request.json['access_technology'] in listaREST04 or request.json['telephone_technology'] in listaREST04 or request.json['broadband_technology'] in 
+			listaREST04 or request.json['tv_technology'] in listaREST04 or request.json['ubicacion'] in listaREST04 or request.json['time_slot'] in listaREST04 or 
+			request.json['work_skill'] in listaREST04 or request.json['fecha'] in listaREST04f:
+				
 			raise REST04Error
 		
-		elif request.json['access_technology'] in listaREST05 or request.json['telephone_technology'] in  listaREST05 or request.json['broadband_technology'] in listaREST05 or request.json['tv_technology'] in listaREST05 or request.json['ubicacion'] in listaREST05 or request.json['time_slot'] in listaREST05 or request.json['work_skill'] in listaREST05 or request.json['fecha'] in listaREST05:
+		elif request.json['access_technology'] in listaREST05 or request.json['telephone_technology'] in  listaREST05 or request.json['broadband_technology'] in 
+			listaREST05 or request.json['tv_technology'] in listaREST05 or request.json['ubicacion'] in listaREST05 or request.json['time_slot'] in listaREST05 or 
+			request.json['work_skill'] in listaREST05 or request.json['fecha'] in listaREST05:
+				
 			raise REST05Error
 			
-		elif request.json['access_technology'] not in listaAccesTechnology or request.json['telephone_technology'] not in listaTelephoneTechnology or request.json['ubicacion'] not in listaUbicacion or request.json['time_slot'] not in listaTimeSlot or request.json['work_skill'] not in listaWorkSkill: 
+		elif request.json['access_technology'] not in listaAccesTechnology or request.json['telephone_technology'] not in listaTelephoneTechnology or 
+			request.json['ubicacion'] not in listaUbicacion or request.json['time_slot'] not in listaTimeSlot or request.json['work_skill'] not in listaWorkSkill: 
+				
 			raise ValorIncorrectoError
 						
-		elif request.json['access_technology'] in listaAccesTechnology and request.json['telephone_technology'] in listaTelephoneTechnology and (request.json['broadband_technology'] in listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
+		elif request.json['access_technology'] in listaAccesTechnology and request.json['telephone_technology'] in listaTelephoneTechnology and (request.json['broadband_technology'] in 
+			listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and 
+			request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
+				
 			new_cupo = TOA_CUPOS_EMPRESA(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], request.json['work_skill'], request.json['available'])
 			db.session.add(new_cupo)
 			db.session.commit()
@@ -194,22 +214,37 @@ def addCupoEmpresa():
 @app.route('/save_individuos', methods=['POST'])
 def addCupoIndividuos():
 	try:
-		if len(request.json['access_technology']) > 10 or len(request.json['telephone_technology']) > 10 or len(request.json['broadband_technology']) > 10 or len(request.json['tv_technology'])> 10 or len(request.json['ubicacion']) > 20 or len(request.json['time_slot']) > 5 or len(request.json['work_skill']) > 30:
+		if len(request.json['access_technology']) > 10 or len(request.json['telephone_technology']) > 10 or len(request.json['broadband_technology']) > 10 or 
+			len(request.json['tv_technology'])> 10 or len(request.json['ubicacion']) > 20 or len(request.json['time_slot']) > 5 or len(request.json['work_skill']) > 30:
+				
 			raise MaxLongError
 			
-		elif not request.json['access_technology'] or not request.json['telephone_technology'] or not request.json['ubicacion'] or not request.json['fecha'] or not request.json['time_slot'] or not request.json['work_skill'] or not request.json['available'] :
+		elif not request.json['access_technology'] or not request.json['telephone_technology'] or not request.json['ubicacion'] or not request.json['fecha'] or not 
+			request.json['time_slot'] or not request.json['work_skill'] or not request.json['available'] :
+				
 			raise CampoNuloError 
 			
-		elif request.json['access_technology'] in listaREST04 or request.json['telephone_technology'] in listaREST04 or request.json['broadband_technology'] in listaREST04 or request.json['tv_technology'] in listaREST04 or request.json['ubicacion'] in listaREST04 or request.json['time_slot'] in listaREST04 or request.json['work_skill'] in listaREST04 or request.json['fecha'] in listaREST04f:
+		elif request.json['access_technology'] in listaREST04 or request.json['telephone_technology'] in listaREST04 or request.json['broadband_technology'] in 
+			listaREST04 or request.json['tv_technology'] in listaREST04 or request.json['ubicacion'] in listaREST04 or request.json['time_slot'] in listaREST04 or 
+			request.json['work_skill'] in listaREST04 or request.json['fecha'] in listaREST04f:
+				
 			raise REST04Error
 		
-		elif request.json['access_technology'] in listaREST05 or request.json['telephone_technology'] in  listaREST05 or request.json['broadband_technology'] in listaREST05 or request.json['tv_technology'] in listaREST05 or request.json['ubicacion'] in listaREST05 or request.json['time_slot'] in listaREST05 or request.json['work_skill'] in listaREST05 or request.json['fecha'] in listaREST05:
+		elif request.json['access_technology'] in listaREST05 or request.json['telephone_technology'] in  listaREST05 or request.json['broadband_technology'] in 
+			listaREST05 or request.json['tv_technology'] in listaREST05 or request.json['ubicacion'] in listaREST05 or request.json['time_slot'] in listaREST05 or 
+			request.json['work_skill'] in listaREST05 or request.json['fecha'] in listaREST05:
+				
 			raise REST05Error
 			
-		elif request.json['access_technology'] not in listaAccesTechnology or request.json['telephone_technology'] not in listaTelephoneTechnology or request.json['ubicacion'] not in listaUbicacion or request.json['time_slot'] not in listaTimeSlot or request.json['work_skill'] not in listaWorkSkill: 
+		elif request.json['access_technology'] not in listaAccesTechnology or request.json['telephone_technology'] not in listaTelephoneTechnology or 
+			request.json['ubicacion'] not in listaUbicacion or request.json['time_slot'] not in listaTimeSlot or request.json['work_skill'] not in listaWorkSkill: 
+				
 			raise ValorIncorrectoError
 						
-		elif request.json['access_technology'] in listaAccesTechnology and request.json['telephone_technology'] in listaTelephoneTechnology and (request.json['broadband_technology'] in listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
+		elif request.json['access_technology'] in listaAccesTechnology and request.json['telephone_technology'] in listaTelephoneTechnology and (request.json['broadband_technology'] in 
+			listaBroadbandTechnology or not request.json['broadband_technology']) and (request.json['tv_technology'] in listaTVTechnology or not request.json['tv_technology']) and 
+			request.json['ubicacion'] in listaUbicacion and request.json['time_slot'] in listaTimeSlot and request.json['work_skill'] in listaWorkSkill:
+				
 			new_cupo = TOA_CUPOS_INDIVIDUOS(request.json['access_technology'], request.json['telephone_technology'], request.json['broadband_technology'], request.json['tv_technology'], request.json['ubicacion'], request.json['fecha'], request.json['time_slot'], request.json['work_skill'], request.json['available'])
 			db.session.add(new_cupo)
 			db.session.commit()
