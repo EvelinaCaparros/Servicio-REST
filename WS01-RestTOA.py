@@ -9,8 +9,8 @@
 #                BD: SQLAlchemy													      #
 #                HTML: jinja2 													      #
 #                                                                                                                                     #
-#	 DEPENDENCIAS:  datetime (lib de fechas)										      #
-#                	Driver BD: postgres (lib psycopg2-binary)								      #
+#    DEPENDENCIAS:  datetime (lib de fechas)										              #
+#                   Driver BD: postgres (lib psycopg2-binary)								              #
 #																      #
 #    Servicios dentro del archivo:                                                                                                    # 
 #       				addCupoEmpresa                   				          		      # 
